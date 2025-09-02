@@ -3,6 +3,7 @@ export const Step1 = ({
   totalSteps,
   handleOnClickSteps,
   handleOnChange,
+  userInfo,
 }) => {
   return (
     <div>
@@ -12,11 +13,17 @@ export const Step1 = ({
         </p>
         <div className="w-[416px] h-[45px] mt-2">
           <input
+            value={userInfo.firstName}
             type="text"
             className="border border-[#0CA5E9] p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal"
             placeholder="placeholder"
-            onChange={handleOnChange}
-          ></input>
+            onChange={(e) =>
+              handleOnChange({
+                ...userInfo,
+                firstName: e.target.value,
+              })
+            }
+          />
         </div>
       </div>
 

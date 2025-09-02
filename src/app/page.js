@@ -17,15 +17,11 @@ export default function Home() {
     firstName: "",
     lastName: "",
     surname: "",
-  });
-
-  // Step 2: Contact information
-
-  const [contact, setContact] = useState({
     email: "",
     phone: "",
     password: "",
     confirmPassword: "",
+    dateOfBirth: "",
   });
 
   // Step 3:
@@ -59,10 +55,11 @@ export default function Home() {
         </p>
 
         <Step1
+          userInfo={userInfo}
           handleOnClickSteps={handleOnClickSteps}
           step={step}
           totalSteps={totalSteps}
-          handleOnChange={handleOnChange}
+          handleOnChange={setUSerInfo}
           handleOnClickBackSteps={handleOnClickBackSteps}
         />
       </div>
