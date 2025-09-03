@@ -8,10 +8,6 @@ export default function Home() {
 
   const [inputValue, setInputValue] = useState("");
 
-  const handleOnChange = () => {
-    setInputValue(inputValue);
-  };
-
   // Step 1: User profile information
   const [userInfo, setUSerInfo] = useState({
     firstName: "",
@@ -22,18 +18,27 @@ export default function Home() {
     password: "",
     confirmPassword: "",
     dateOfBirth: "",
+    profileImage: "",
   });
 
-  // Step 3:
+  // Step 3: Error messages to display
+
+  const [errors, setErrors] = useState("");
 
   // "Continue 1/3" Button - step shift function
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(3);
   const totalSteps = 4;
-  const handleOnClickSteps = () => {
+
+  const moveSteps = () => {
     if (step < totalSteps) {
       setStep(step + 1);
     }
+  };
+
+  const handleOnClick = () => {
+    // validate();
+    moveSteps();
   };
 
   const handleOnClickBackSteps = () => {
@@ -56,11 +61,13 @@ export default function Home() {
 
         <Step1
           userInfo={userInfo}
-          handleOnClickSteps={handleOnClickSteps}
           step={step}
           totalSteps={totalSteps}
           handleOnChange={setUSerInfo}
-          handleOnClickBackSteps={handleOnClickBackSteps}
+          handleOnClick={handleOnClick}
+          errors={errors}
+          setErrors={setErrors}
+          moveSteps={moveSteps}
         />
       </div>
     );
@@ -81,11 +88,15 @@ export default function Home() {
         </p>
 
         <Step2
-          handleOnClickSteps={handleOnClickSteps}
+          userInfo={userInfo}
           step={step}
           totalSteps={totalSteps}
-          handleOnChange={handleOnChange}
+          handleOnChange={setUSerInfo}
+          handleOnClick={handleOnClick}
+          errors={errors}
           handleOnClickBackSteps={handleOnClickBackSteps}
+          setErrors={setErrors}
+          moveSteps={moveSteps}
         />
       </div>
     );
@@ -106,11 +117,15 @@ export default function Home() {
         </p>
 
         <Step3
-          handleOnClickSteps={handleOnClickSteps}
+          userInfo={userInfo}
           step={step}
           totalSteps={totalSteps}
-          handleOnChange={handleOnChange}
+          handleOnChange={setUSerInfo}
+          handleOnClick={handleOnClick}
+          errors={errors}
           handleOnClickBackSteps={handleOnClickBackSteps}
+          setErrors={setErrors}
+          moveSteps={moveSteps}
         />
       </div>
     );

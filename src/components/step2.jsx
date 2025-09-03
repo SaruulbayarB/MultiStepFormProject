@@ -1,10 +1,54 @@
 export const Step2 = ({
   step,
   totalSteps,
-  handleOnClickSteps,
   handleOnChange,
   handleOnClickBackSteps,
+  errors,
+  moveSteps,
+  setErrors,
+  userInfo,
 }) => {
+  function validateAndMove() {
+    let hasError = false;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\+?[0-9]{7,15}$/;
+
+    const newErrors = {};
+
+    if (emailRegex.test(userInfo.email)) {
+      newErrors.email = "must enter valid email";
+      hasError = true;
+    } else {
+      newErrors.email = "";
+    }
+
+    if (!phoneRegex.test(userInfo.phone)) {
+      newErrors.phone = "must enter valid phone number";
+      hasError = true;
+    } else {
+      newErrors.phone = "";
+    }
+
+    if (userInfo.password === "") {
+      newErrors.password = "must enter your password";
+      hasError = true;
+    } else {
+      newErrors.password = "";
+    }
+
+    if (userInfo.confirmPassword === "") {
+      newErrors.confirmPassword = "must enter your password";
+      hasError = true;
+    } else {
+      newErrors.password = "";
+    }
+
+    setErrors(newErrors);
+    if (!hasError) {
+      moveSteps();
+    }
+  }
+
   return (
     <div>
       <div className="mt-7 text-[#334155] text-sm font-semibold">
@@ -16,8 +60,19 @@ export const Step2 = ({
             type="text"
             className="border border-[#0CA5E9] p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal"
             placeholder="placeholder"
-            onChange={handleOnChange}
+            onChange={(e) =>
+              handleOnChange({
+                ...userInfo,
+                email: e.target.value,
+              })
+            }
           ></input>
+
+          {errors.email && (
+            <div className="text-red-600 font-light mt-1 pl-2">
+              {errors.email}
+            </div>
+          )}
         </div>
       </div>
 
@@ -29,8 +84,19 @@ export const Step2 = ({
           <input
             className="border border-[#0CA5E9] p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal"
             placeholder="placeholder"
-            onChange={handleOnChange}
+            onChange={(e) =>
+              handleOnChange({
+                ...userInfo,
+                phone: e.target.value,
+              })
+            }
           ></input>
+
+          {errors.phone && (
+            <div className="text-red-600 font-light mt-1 pl-2">
+              {errors.phone}
+            </div>
+          )}
         </div>
       </div>
 
@@ -42,8 +108,18 @@ export const Step2 = ({
           <input
             className="border border-[#0CA5E9] p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal"
             placeholder="placeholder"
-            onChange={handleOnChange}
+            onChange={(e) =>
+              handleOnChange({
+                ...userInfo,
+                password: e.target.value,
+              })
+            }
           ></input>
+          {errors.password && (
+            <div className="text-red-600 font-light mt-1 pl-2">
+              {errors.password}
+            </div>
+          )}
         </div>
       </div>
 
@@ -55,8 +131,18 @@ export const Step2 = ({
           <input
             className="border border-[#0CA5E9] p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal"
             placeholder="placeholder"
-            onChange={handleOnChange}
+            onChange={(e) =>
+              handleOnChange({
+                ...userInfo,
+                confirmPassword: e.target.value,
+              })
+            }
           ></input>
+          {errors.confirmPassword && (
+            <div className="text-red-600 font-light mt-1 pl-2">
+              {errors.confirmPassword}
+            </div>
+          )}
         </div>
       </div>
 
@@ -69,7 +155,7 @@ export const Step2 = ({
         </button>
         <button
           className="w-[280px] h-[44px] mt-10 bg-[#202124] border rounded-md text-[#FFFFFF] text-base font-medium leading-[24px] ml-2"
-          onClick={handleOnClickSteps}
+          onClick={validateAndMove}
         >
           Continue <span>{step}/</span> <span>{totalSteps}</span>
         </button>
