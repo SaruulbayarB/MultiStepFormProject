@@ -49,7 +49,9 @@ export const Step1 = ({
           <input
             value={userInfo.firstName}
             type="text"
-            className="border border-[#0CA5E9] p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal"
+            className={`border p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal ${
+              errors.firstName ? "border-red-500" : "border-[#0CA5E9]"
+            }`}
             placeholder="placeholder"
             onChange={(e) =>
               handleOnChange({
@@ -72,7 +74,9 @@ export const Step1 = ({
         </p>
         <div className="w-[416px] h-[45px] mt-2">
           <input
-            className="border border-[#0CA5E9] p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal"
+            className={`border  p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal ${
+              errors.lastName ? "border-red-500" : "border-[#0CA5E9]"
+            }`}
             placeholder="placeholder"
             onChange={(e) =>
               handleOnChange({
@@ -95,7 +99,9 @@ export const Step1 = ({
         </p>
         <div className="w-[416px] h-[45px] mt-2">
           <input
-            className="border border-[#0CA5E9] p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal"
+            className={`border p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal ${
+              errors.surname ? "border-red-500" : "border-[#0CA5E9]"
+            }`}
             placeholder="placeholder"
             onChange={(e) =>
               handleOnChange({

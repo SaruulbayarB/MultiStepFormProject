@@ -93,6 +93,7 @@ export const Step3 = ({
         >
           Continue <span>{step}/</span> <span>{totalSteps}</span>
         </button>
+        console.log(validateAndMove)
       </div>
     </div>
   );

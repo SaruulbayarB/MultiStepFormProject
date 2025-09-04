@@ -27,7 +27,7 @@ export default function Home() {
 
   // "Continue 1/3" Button - step shift function
 
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
   const totalSteps = 4;
 
   const moveSteps = () => {
@@ -48,7 +48,7 @@ export default function Home() {
   if (step == 1) {
     return (
       <div
-        className="w-[480px] h-[655px] bg-[#FFF] p-8 flex flex-col items-start ml-180 mt-45
+        className="w-[480px] bg-[#FFF] p-8 flex flex-col items-start ml-180 mt-45
       rounded-lg"
       >
         <img src="/pinecone.svg" className="width-15 height-15"></img>
@@ -76,7 +76,7 @@ export default function Home() {
   if (step == 2) {
     return (
       <div
-        className="w-[480px] h-[655px] bg-[#FFF] p-8 flex flex-col items-start ml-180 mt-45
+        className="w-[480px] bg-[#FFF] p-8 flex flex-col items-start ml-180 mt-45
       rounded-lg"
       >
         <img src="/pinecone.svg" className="width-15 height-15"></img>
@@ -105,7 +105,7 @@ export default function Home() {
   if (step == 3) {
     return (
       <div
-        className="w-[480px] h-[655px] bg-[#FFF] p-8 flex flex-col items-start ml-180 mt-45
+        className="w-[480px] bg-[#FFF] p-8 flex flex-col items-start ml-180 mt-45
       rounded-lg"
       >
         <img src="/pinecone.svg" className="width-15 height-15"></img>

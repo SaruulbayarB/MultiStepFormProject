@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 export const Step2 = ({
   step,
   totalSteps,
@@ -8,6 +10,9 @@ export const Step2 = ({
   setErrors,
   userInfo,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   function validateAndMove() {
     let hasError = false;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -15,7 +20,7 @@ export const Step2 = ({
 
     const newErrors = {};
 
-    if (emailRegex.test(userInfo.email)) {
+    if (!emailRegex.test(userInfo.email)) {
       newErrors.email = "must enter valid email";
       hasError = true;
     } else {
@@ -37,10 +42,13 @@ export const Step2 = ({
     }
 
     if (userInfo.confirmPassword === "") {
-      newErrors.confirmPassword = "must enter your password";
+      newErrors.confirmPassword = "must confirm your password";
+      hasError = true;
+    } else if (userInfo.password !== userInfo.confirmPassword) {
+      newErrors.confirmPassword = "your password does not match";
       hasError = true;
     } else {
-      newErrors.password = "";
+      newErrors.confirmPassword = "";
     }
 
     setErrors(newErrors);
@@ -58,7 +66,9 @@ export const Step2 = ({
         <div className="w-[416px] h-[45px] mt-2">
           <input
             type="text"
-            className="border border-[#0CA5E9] p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal"
+            className={`border  p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal ${
+              errors.email ? "border-red-500" : "border-[#0CA5E9]"
+            }`}
             placeholder="placeholder"
             onChange={(e) =>
               handleOnChange({
@@ -82,7 +92,9 @@ export const Step2 = ({
         </p>
         <div className="w-[416px] h-[45px] mt-2">
           <input
-            className="border border-[#0CA5E9] p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal"
+            className={`border  p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal ${
+              errors.phone ? "border-red-500" : "border-[#0CA5E9]"
+            }`}
             placeholder="placeholder"
             onChange={(e) =>
               handleOnChange({
@@ -106,7 +118,10 @@ export const Step2 = ({
         </p>
         <div className="w-[416px] h-[45px] mt-2">
           <input
-            className="border border-[#0CA5E9] p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal"
+            type={showPassword ? "text" : "password"}
+            className={`border  p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal ${
+              errors.password ? "border-red-500" : "border-[#0CA5E9]"
+            }`}
             placeholder="placeholder"
             onChange={(e) =>
               handleOnChange({
@@ -115,6 +130,12 @@ export const Step2 = ({
               })
             }
           ></input>
+          <ion-icon
+            name={showPassword ? "eye-off-outline" : "eye-outline"}
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-3 text-xl text-gray-500 cursor-pointer"
+          />
+          {/* <ion-icon name="eye-outline"></ion-icon> */}
           {errors.password && (
             <div className="text-red-600 font-light mt-1 pl-2">
               {errors.password}
@@ -129,7 +150,10 @@ export const Step2 = ({
         </p>
         <div className="w-[416px] h-[45px] mt-2">
           <input
-            className="border border-[#0CA5E9] p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal"
+            type="password"
+            className={`border  p-3 w-[416px] h-[45px] rounded-lg text-lg text-[#121316] font-normal ${
+              errors.confirmPassword ? "border-red-500" : "border-[#0CA5E9]"
+            }`}
             placeholder="placeholder"
             onChange={(e) =>
               handleOnChange({
