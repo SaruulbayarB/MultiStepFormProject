@@ -3,6 +3,21 @@ import { useState } from "react";
 
 import { Step1, Step2, Step3 } from "@/components";
 
+import { Button } from "@/components/ui/button";
+
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
+import * as React from "react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+
 export default function Home() {
   // Detect input elements
 
